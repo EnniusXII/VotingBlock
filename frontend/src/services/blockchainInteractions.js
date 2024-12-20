@@ -11,10 +11,34 @@ const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
 
 export const createVotingSession = async(title, candidates, durationSeconds) => {
     console.log(title, candidates, durationSeconds);
-    
+
     try {
         await contract.createVotingSession(title, candidates, durationSeconds);
     } catch (error) {
         console.error("Failed to create session:", error);
     }
+};
+
+export const getSessionDetails = async(sessionId) => {
+  
+    try {
+    const [title, candidates, isActive, resultsCalculated, startTimestamp, endTimestamp] = 
+        await contract.getSessionInfo(sessionId);
+
+        console.log("Title:", title, candidates, isActive, resultsCalculated, Number(startTimestamp), endTimestamp)
+
+        return {
+            title,
+            candidates,
+            isActive,
+            resultsCalculated,
+            startTimestamp: Number(startTimestamp),
+            endTimestamp: Number(endTimestamp),
+        }
+    } catch (error) {
+        console.error("Failed to get session:", error);
+    }
+        
+  
+    
 };
