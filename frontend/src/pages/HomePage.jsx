@@ -6,7 +6,6 @@ const HomePage = () => {
         <h1>Welcome to VotingBlock</h1>
         <button>Create Voting Session</button>
         <button>View Voting Sessions</button>
-      
     </div>
   )
 }
