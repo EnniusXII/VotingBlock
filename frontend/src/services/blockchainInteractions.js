@@ -1,5 +1,20 @@
 import abi from "../../VotingBlockABI.json";
+import { ethers } from "ethers";
 
-const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const URL = "http://127.0.0.1:8545";
+const PROVIDER_URL = import.meta.env.VITE_PROVIDER_URL;
+const PRIVATE_KEY = import.meta.env.VITE_PRIVATE_KEY;
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
+const provider = new ethers.JsonRpcProvider(PROVIDER_URL);
+const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
+
+export const createVotingSession = async(title, candidates, durationSeconds) => {
+    console.log(title, candidates, durationSeconds);
+    
+    try {
+        await contract.createVotingSession(title, candidates, durationSeconds);
+    } catch (error) {
+        console.error("Failed to create session:", error);
+    }
+};

@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
+import { createVotingSession } from '../services/blockchainInteractions';
 
 const CreateSessionPage = () => {
     const [title, setTitle] = useState("Best Fruit");
     const [candidates, setCandidates] = useState(["Banana", "Mango"]);
     const [duration, setDuration] = useState(36000);
 
+    const handleCreateSession = async (e) => {
+        e.preventDefault();
+
+        await createVotingSession(title, candidates, duration);
+    };
+
   return (
     <div>
         <h2>Create a Voting Session</h2>
 
-        <form>
+        <form onSubmit={handleCreateSession}>
           <label>Title: </label>
           <input
             type="text"
