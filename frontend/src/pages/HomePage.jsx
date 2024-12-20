@@ -1,11 +1,18 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 const HomePage = () => {
+
   return (
     <div>
         <h1>Welcome to VotingBlock</h1>
-        <button>Create Voting Session</button>
-        <button>View Voting Sessions</button>
+
+        <NavLink to="/create">
+            <button>Create Voting Session</button>
+        </NavLink>
+        <NavLink to="/sessions">
+            <button>View Voting Sessions</button>
+        </NavLink>
     </div>
   )
 }
