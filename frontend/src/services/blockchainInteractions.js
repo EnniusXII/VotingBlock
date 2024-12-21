@@ -25,9 +25,10 @@ export const getSessionDetails = async(sessionId) => {
     const [title, candidates, isActive, resultsCalculated, startTimestamp, endTimestamp] = 
         await contract.getSessionInfo(sessionId);
 
-        // console.log("Title:", title, candidates, isActive, resultsCalculated, Number(startTimestamp), endTimestamp)
+        console.log("Session ID:", sessionId, "Title:", title, candidates, isActive, resultsCalculated, Number(startTimestamp), endTimestamp)
 
         return {
+            sessionId,
             title,
             candidates,
             isActive,
