@@ -25,7 +25,7 @@ export const getSessionDetails = async(sessionId) => {
     const [title, candidates, isActive, resultsCalculated, startTimestamp, endTimestamp] = 
         await contract.getSessionInfo(sessionId);
 
-        console.log("Title:", title, candidates, isActive, resultsCalculated, Number(startTimestamp), endTimestamp)
+        // console.log("Title:", title, candidates, isActive, resultsCalculated, Number(startTimestamp), endTimestamp)
 
         return {
             title,
@@ -38,7 +38,31 @@ export const getSessionDetails = async(sessionId) => {
     } catch (error) {
         console.error("Failed to get session:", error);
     }
+};
+
+export const getSessionCount = async() => {
+    try {
+        const count = await contract.votingSessionCount();
+        return Number(count);
+    } catch (error) {
+        console.error("Failed to get session count:", error);
+    }
+};
+
+export const getAllSessions = async() => {
+    try {
+        const count = await getSessionCount();
+
+        const sessions = [];
+        for (let i = 0; i < count; i++) {
+          const sessionDetails = await getSessionDetails(i);
+          sessions.push(sessionDetails);
+        }
+        console.log(sessions);
         
-  
-    
+        return sessions;
+    } catch (error) {
+        console.error("Failed to retrieve sessions:", error);
+    }
+
 };
