@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { getAllSessions, getSessionDetails } from '../services/blockchainInteractions';
+import { useNavigate } from 'react-router-dom';
 
 const VotingSessionsPage = () => {
     const [sessions, setSessions] = useState([]);
     const [currentTime, setCurrentTime] = useState(Math.floor(Date.now() / 1000));
+    const navigate = useNavigate();
 
     useEffect(() => {(async () => {
           const allSessions = await getAllSessions();
@@ -56,7 +58,7 @@ const VotingSessionsPage = () => {
         {sessions.map(session => {
             const timeRemaining = session.isActive ? (session.endTimestamp - currentTime) : 0;
             return (
-                <div key={session.sessionId}>
+                <div key={session.sessionId} onClick={() => navigate(`/sessions/${session.sessionId}`)}>
                     <h3>{session.title}</h3>
                     <p>{formatTimeRemaining(timeRemaining)}</p>
                 </div>

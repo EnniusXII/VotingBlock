@@ -67,3 +67,13 @@ export const getAllSessions = async() => {
     }
 
 };
+
+export const getSessionTally = async(sessionId) => {
+    try {
+        const tally = await contract.getTally(sessionId);
+
+        return tally.map(t => Number(t));
+    } catch (error) {
+        console.error("Failed to get session count:", error);
+    }
+};
