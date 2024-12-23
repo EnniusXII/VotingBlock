@@ -77,3 +77,22 @@ export const getSessionTally = async(sessionId) => {
         console.error("Failed to get session count:", error);
     }
 };
+
+export const getUserHasVoted = async(sessionId, userAddress) => {
+    try {
+        const userHasVoted = await contract.hasVoted(sessionId, userAddress);
+
+        return userHasVoted;
+    } catch (error) {
+        console.error("Failed to get user voting status:", error);
+    }
+};
+
+export const vote = async(sessionId, candidateIndex) => {
+    try {
+        const tx = await contract.vote(sessionId, candidateIndex);
+        await tx.wait();  
+    } catch (error) {
+        console.error("Failed to cast vote:", error);
+    }
+};
