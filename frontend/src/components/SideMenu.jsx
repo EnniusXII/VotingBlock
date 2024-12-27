@@ -14,6 +14,11 @@ const SideMenu = ({ isOpen, onClose }) => {
             </button>
             <ul>
                 <li>
+                <NavLink to="/" onClick={onClose}>
+                    Home
+                </NavLink>
+                </li>
+                <li>
                 <NavLink to="/create" onClick={onClose}>
                     Create Session
                 </NavLink>
