@@ -4,6 +4,7 @@ import CreateSessionPage from "./pages/CreateSessionPage";
 import VotingSessionsPage from "./pages/VotingSessionsPage";
 import SessionPage from "./pages/SessionPage";
 import Layout from "./pages/Layout";
+import CandidateVotersPage from "./pages/CandidateVotersPage";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path: "/sessions/:sessionId",
                 element: <SessionPage/>,
+            },
+            {
+                path: "/sessions/:sessionId/candidate/:candidateIndex/voters",
+                element: <CandidateVotersPage/>,
             }
         ]
     },

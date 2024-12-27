@@ -96,3 +96,35 @@ export const vote = async(sessionId, candidateIndex) => {
         console.error("Failed to cast vote:", error);
     }
 };
+
+export const getVotersForCandidate = async (sessionId, candidateIndex, fromBlock = 0, toBlock = "latest") => {
+    try {
+        const sessionIdNum = Number(sessionId);
+        const candidateIndexNum = Number(candidateIndex);
+
+        const eventFilter = contract.filters.VoteCast(sessionIdNum, null, candidateIndexNum);
+
+        const logs = await provider.getLogs({
+            fromBlock,
+            toBlock,
+            address: CONTRACT_ADDRESS,
+            topics: eventFilter.topics,
+        });
+
+        const parsedLogs = logs
+            .map((log) => {
+                try {
+                    return contract.interface.parseLog(log);
+                } catch {
+                    return null;
+                }
+            })
+            .filter((parsedLog) => parsedLog && parsedLog.name === "VoteCast");
+
+        return parsedLogs.map((log) => log.args.voter);
+
+    } catch (error) {
+    console.error("Failed to get voters for candidate:", error);
+    return [];
+    }
+};

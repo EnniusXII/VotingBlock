@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import "../styles/pages/HomePage.css"
+import "../styles/pages/Home.css"
 
 const HomePage = () => {
 

@@ -28,7 +28,7 @@ contract VotingBlock {
     event VoteCast(
         uint indexed sessionId, 
         address indexed voter, 
-        uint candidateIndex
+        uint indexed candidateIndex
     );
 
     event ResultsCalculated(

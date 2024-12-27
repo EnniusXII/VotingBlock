@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSessionDetails, getSessionTally, getUserHasVoted, vote } from '../services/blockchainInteractions';
-import "../styles/pages/SessionPage.css"
+import "../styles/pages/Session.css"
 
 const SessionPage = () => {
     const { sessionId } = useParams();
     const [session, setSession] = useState(null);
     const [hasVoted, setHasVoted] = useState(false);
+    const navigate = useNavigate();
     const userAddress = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
 
     useEffect(() => {(async () => {
           const details = await getSessionDetails(sessionId);
           const tally = await getSessionTally(sessionId);
           const userVotingStatus = await getUserHasVoted(sessionId, userAddress);
-          console.log("Details: ", details);
-          console.log("User has voted: ", userVotingStatus);
 
           const totalVotes = tally.reduce((acc, votes) => acc + votes, 0)
           setSession({...details, tally, totalVotes });
@@ -48,15 +47,21 @@ const SessionPage = () => {
                     : 0;
 
                 return (
-                    <div key={i} className="candidate">
+                    <div 
+                        key={i} 
+                        className="candidate"
+                        onClick={() => navigate(`/sessions/${sessionId}/candidate/${i}/voters`)}
+                    >
                         <div
                             className="candidate-bar"
                             style={{ width: `${percentage}%` }}
                         ></div>
-                        <div className="candidate-content">
+                        <div 
+                            className="candidate-content"
+                        >
                             <span>{candidate}: {session.tally[i]} votes</span>
                             {session.isActive && !hasVoted && (
-                                <button onClick={() => handleVote(i)}>Vote</button>
+                                <button onClick={(e) => {e.stopPropagation(), handleVote(i)}}>Vote</button>
                             )}
                         </div>
                     </div>

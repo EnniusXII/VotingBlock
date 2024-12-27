@@ -18,10 +18,10 @@ const CreateSessionPage = () => {
     };
 
   return (
-    <div>
+    <div className='create-session-page'>
         <h2>Create a Voting Session</h2>
 
-        <form onSubmit={handleCreateSession}>
+        <form className='create-session-form' onSubmit={handleCreateSession}>
           <input
             placeholder="Title"
             type="text"

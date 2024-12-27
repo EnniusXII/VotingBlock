@@ -1,4 +1,15 @@
-form {
+.create-session-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.create-session-page h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.create-session-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -10,13 +21,7 @@ form {
     margin: 2rem auto;
 }
 
-form label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-primary);
-}
-
-form input {
+.create-session-form input {
     padding: 0.5rem;
     border: 1px solid var(--color-border);
     border-radius: 5px;
@@ -24,13 +29,26 @@ form input {
     font-family: var(--font-family);
 }
 
-form input:focus {
+.create-session-form input:focus {
     border-color: var(--color-secondary);
     outline: none;
 }
 
-form button {
+.create-session-form button {
     align-self: flex-start;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: var(--color-secondary);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-session-form button:hover {
+    background-color: var(--color-secondary-hover);
 }
 
 .duration-inputs {
