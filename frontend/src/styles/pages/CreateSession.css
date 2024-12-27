@@ -32,3 +32,32 @@ form input:focus {
 form button {
     align-self: flex-start;
 }
+
+.duration-inputs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.duration-inputs label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.duration-inputs input {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: var(--font-family);
+}
+
+.duration-inputs input:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+}
