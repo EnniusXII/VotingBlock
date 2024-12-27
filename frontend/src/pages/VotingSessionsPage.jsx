@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { getAllSessions } from '../services/blockchainInteractions';
 import { useNavigate } from 'react-router-dom';
-import "../styles/pages/VotingSessions.css"
+import { toast } from 'react-toastify';
+import "../styles/pages/VotingSessions.css";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const VotingSessionsPage = () => {
     const [sessions, setSessions] = useState([]);
     const [currentTime, setCurrentTime] = useState(Math.floor(Date.now() / 1000));
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {(async () => {
-          const allSessions = await getAllSessions();
-          setSessions(allSessions);
+        setLoading(true);
+        try {
+            const allSessions = await getAllSessions();
+            setSessions(allSessions);
+        } catch (error) {
+            toast.error("Failed to load voting sessions.");
+        } finally {
+            setLoading(false);
+        }
         })();
     }, []);
 
@@ -42,6 +52,8 @@ const VotingSessionsPage = () => {
             return `${remainingSeconds} second${remainingSeconds > 1 ? 's' : ''} remaining`;
         }
     };
+
+    if (loading) return <LoadingSpinner />;
 
   return (
     <div className='voting-sessions'>

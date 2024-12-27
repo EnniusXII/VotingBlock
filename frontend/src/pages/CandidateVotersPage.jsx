@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getVotersForCandidate } from '../services/blockchainInteractions';
-import "../styles/pages/CandidateVoters.css"
+import { toast } from 'react-toastify';
+import "../styles/pages/CandidateVoters.css";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const PAGE_SIZE = 10;
 
@@ -9,10 +11,18 @@ const CandidateVotersPage = () => {
     const { sessionId, candidateIndex } = useParams();
     const [voters, setVoters] = useState([]);
     const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {(async () => {
-          const votersList = await getVotersForCandidate(Number(sessionId), Number(candidateIndex));
-          setVoters(votersList);
+        setLoading(true);
+        try {
+            const votersList = await getVotersForCandidate(Number(sessionId), Number(candidateIndex));
+            setVoters(votersList);
+        } catch (error) {
+            toast.error("Failed to load voters for the candidate.");
+        } finally {
+            setLoading(false);
+        }
         })();
     }, [sessionId, candidateIndex]);
 
@@ -22,6 +32,8 @@ const CandidateVotersPage = () => {
 
     const nextPage = () => { if (end < voters.length) setPage(page + 1); };
     const prevPage = () => { if (page > 0) setPage(page - 1); };
+
+    if (loading) return <LoadingSpinner />;
 
   return (
     <div className='candidate-voters-page'>

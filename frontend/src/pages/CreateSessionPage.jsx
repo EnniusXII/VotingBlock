@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { createVotingSession } from '../services/blockchainInteractions';
+import { toast } from 'react-toastify';
 import "../styles/pages/CreateSession.css"
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const CreateSessionPage = () => {
     const [title, setTitle] = useState("Best Fruit");
@@ -8,14 +10,25 @@ const CreateSessionPage = () => {
     const [days, setDays] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const handleCreateSession = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        const duration = (days * 24 * 3600) + (hours * 3600) + (minutes * 60);
+      const duration = (days * 24 * 3600) + (hours * 3600) + (minutes * 60);
 
+      setLoading(true);
+      try {
         await createVotingSession(title, candidates, duration);
+        toast.success("Voting session created successfully!");
+      } catch (error) {
+        toast.error("Failed to create voting session.");
+      } finally {
+        setLoading(false);
+      }
     };
+
+    if (loading) return <LoadingSpinner />;
 
   return (
     <div className='create-session-page'>
