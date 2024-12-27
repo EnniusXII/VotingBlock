@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import SideMenu from './SideMenu';
+import "../styles/components/Header.css"
 
 const Header = () => {
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -7,17 +9,22 @@ const Header = () => {
         setSideMenuOpen(!sideMenuOpen);
     };
   return (
-    <header>
-        <h2>VotingBlock</h2>
+    <>
+      <header>
+          <h2>VotingBlock</h2>
+          
+          <div className='header-right'>
+            <button>Connect Wallet</button>
 
-        <button>Connect Wallet</button>
+            <button className='hamburger-menu' onClick={toggleSideMenu}>
+              &#9776; {/* This is a hamburger icon */}
+            </button>
+          </div>
+        
+      </header>
 
-        <button onClick={toggleSideMenu}>
-          &#9776; {/* This is a hamburger icon */}
-        </button>
-      
-    </header>
-    
+      <SideMenu isOpen={sideMenuOpen} onClose={toggleSideMenu} />
+    </>
   )
 }
 
