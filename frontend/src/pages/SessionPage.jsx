@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getSessionDetails, getSessionTally, getUserHasVoted, vote } from '../services/blockchainInteractions';
+import "../styles/pages/SessionPage.css"
 
 const SessionPage = () => {
     const { sessionId } = useParams();
@@ -14,8 +15,9 @@ const SessionPage = () => {
           const userVotingStatus = await getUserHasVoted(sessionId, userAddress);
           console.log("Details: ", details);
           console.log("User has voted: ", userVotingStatus);
-          
-          setSession({...details, tally});
+
+          const totalVotes = tally.reduce((acc, votes) => acc + votes, 0)
+          setSession({...details, tally, totalVotes });
           setHasVoted(userVotingStatus);
         })();
     }, [sessionId, userAddress]);
@@ -27,7 +29,8 @@ const SessionPage = () => {
         const updatedTally = await getSessionTally(sessionId);
         const userVotingStatus = await getUserHasVoted(sessionId, userAddress);
 
-        setSession({ ...updatedDetails, tally: updatedTally });
+        const totalVotes = updatedTally.reduce((acc, votes) => acc + votes, 0);
+        setSession({ ...updatedDetails, tally: updatedTally, totalVotes });
         setHasVoted(userVotingStatus);
     };
 
@@ -36,17 +39,29 @@ const SessionPage = () => {
     }
 
   return (
-    <div>
+    <div className='session-page'>
         <h2>{session.title}</h2>
         <div>
-            {session.candidates.map((candidate, i) => (
-                <div key={i}>
-                    {candidate}: {session.tally[i]} votes
-                    {session.isActive && !hasVoted && (
-                        <button onClick={() => handleVote(i)}>Vote</button>
-                    )}
-                </div>
-            ))}
+            {session.candidates.map((candidate, i) => {
+                const percentage = session.totalVotes > 0
+                    ? (session.tally[i] / session.totalVotes) * 100
+                    : 0;
+
+                return (
+                    <div key={i} className="candidate">
+                        <div
+                            className="candidate-bar"
+                            style={{ width: `${percentage}%` }}
+                        ></div>
+                        <div className="candidate-content">
+                            <span>{candidate}: {session.tally[i]} votes</span>
+                            {session.isActive && !hasVoted && (
+                                <button onClick={() => handleVote(i)}>Vote</button>
+                            )}
+                        </div>
+                    </div>
+                );
+            })}
         </div>
         {hasVoted && <p>You have voted in this session.</p>}
         {!session.isActive && <p>This voting session is no longer active.</p>}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { createVotingSession } from '../services/blockchainInteractions';
+import "../styles/pages/CreateSession.css"
 
 const CreateSessionPage = () => {
     const [title, setTitle] = useState("Best Fruit");

@@ -1,0 +1,16 @@
+.homepage {
+    text-align: center;
+    padding: 2rem;
+}
+
+.homepage h1 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.homepage button {
+    margin: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+}

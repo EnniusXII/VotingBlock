@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getAllSessions, getSessionDetails } from '../services/blockchainInteractions';
+import { getAllSessions } from '../services/blockchainInteractions';
 import { useNavigate } from 'react-router-dom';
+import "../styles/pages/VotingSessions.css"
 
 const VotingSessionsPage = () => {
     const [sessions, setSessions] = useState([]);
@@ -42,23 +43,14 @@ const VotingSessionsPage = () => {
         }
     };
 
-    const handleGetSession = async (e) => {
-            e.preventDefault();
-    
-            // await getSessionDetails(0);
-            await getAllSessions();
-            
-    };
   return (
-    <div>
+    <div className='voting-sessions'>
         <h2>Voting Sessions</h2>
-
-        <button onClick={handleGetSession}>Get session</button>
 
         {sessions.map(session => {
             const timeRemaining = session.isActive ? (session.endTimestamp - currentTime) : 0;
             return (
-                <div key={session.sessionId} onClick={() => navigate(`/sessions/${session.sessionId}`)}>
+                <div className='session-card' key={session.sessionId} onClick={() => navigate(`/sessions/${session.sessionId}`)}>
                     <h3>{session.title}</h3>
                     <p>{formatTimeRemaining(timeRemaining)}</p>
                 </div>

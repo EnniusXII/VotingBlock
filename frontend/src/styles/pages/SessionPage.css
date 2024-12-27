@@ -1,0 +1,55 @@
+.session-page {
+    padding: 2rem;
+}
+
+.session-page h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.session-page .candidate {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.session-page .candidate-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--color-secondary);
+    border-radius: 8px 0 0 8px;
+    z-index: 1;
+    transition: width 0.3s ease-in-out;
+}
+
+.session-page .candidate-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.session-page .candidate button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-secondary);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.session-page .candidate button:hover {
+    background-color: var(--color-secondary-hover);
+}

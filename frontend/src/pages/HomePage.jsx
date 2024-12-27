@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import "../styles/pages/HomePage.css"
 
 const HomePage = () => {
 
   return (
-    <div>
+    <div className='homepage'>
         <h1>Welcome to VotingBlock</h1>
 
         <NavLink to="/create">

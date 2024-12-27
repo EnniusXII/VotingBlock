@@ -22,12 +22,13 @@
     right: -300px;
     width: 300px;
     height: 100%;
-    background-color: #f8f8f8;
-    border-left: 1px solid #ccc;
+    background-color: var(--color-accent);
+    border-left: 1px solid var(--color-border);
     transition: right 0.3s ease;
-    padding: 10px;
+    padding: 1.5rem;
     box-sizing: border-box;
     z-index: 1000;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
 }
   
 .side-menu.open {
@@ -38,30 +39,30 @@
     background: transparent;
     border: none;
     font-size: 2rem;
-    position: relative;
-    left: 70px;
     cursor: pointer;
+    color: var(--color-primary);
 }
 
 .side-menu ul {
     list-style: none;
     padding: 0;
-    margin-top: 40px;
+    margin: 0;
+    margin-top: 2rem;
 }
 
 .side-menu li {
-    height: 40px;
-    margin: 10px 20px;
+    margin: 1rem 0;
     text-align: left;
-    border-bottom: 1px solid #ccc;
 }
 
 .side-menu a {
     text-decoration: none;
-    color: #333;
-    font-size: 16px;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 .side-menu a:hover {
-    color: #000;
+    color: var(--color-secondary);
 }

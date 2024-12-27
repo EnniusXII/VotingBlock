@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SideMenu from './SideMenu';
 import "../styles/components/Header.css"
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -11,7 +12,9 @@ const Header = () => {
   return (
     <>
       <header>
-          <h2>VotingBlock</h2>
+          <NavLink to="/">
+            <h2>VotingBlock</h2>
+          </NavLink>
           
           <div className='header-right'>
             <button>Connect Wallet</button>
