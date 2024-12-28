@@ -27,7 +27,7 @@
 - **Smart Contract:** Written in Solidity and deployed on the Sepolia test network.
 - **Frontend:** Built with React for a dynamic and responsive user interface.
 - **Blockchain Network:** Ethereum (Sepolia testnet).
-- **Hosting:** Frontend hosted on Vercel.
+- **Hosting:** Frontend hosted on Vercel. - https://vb-frontend.vercel.app/
 
 ---
 
