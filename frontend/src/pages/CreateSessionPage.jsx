@@ -5,8 +5,8 @@ import "../styles/pages/CreateSession.css"
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const CreateSessionPage = () => {
-    const [title, setTitle] = useState("Best Fruit");
-    const [candidates, setCandidates] = useState(["Banana", "Mango"]);
+    const [title, setTitle] = useState("");
+    const [candidates, setCandidates] = useState(["", ""]);
     const [days, setDays] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);

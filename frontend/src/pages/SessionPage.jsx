@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSessionDetails, getSessionTally, getUserHasVoted, vote } from '../services/blockchainInteractions';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../components/LoadingSpinner';
 import "../styles/pages/Session.css"
+import { Web3Context } from '../context/Web3Context';
 
 const SessionPage = () => {
     const { sessionId } = useParams();
@@ -11,14 +12,18 @@ const SessionPage = () => {
     const [hasVoted, setHasVoted] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const userAddress = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
+    const { userAddress } = useContext(Web3Context);
 
     useEffect(() => {(async () => {
         setLoading(true);
         try {
             const details = await getSessionDetails(sessionId);
             const tally = await getSessionTally(sessionId);
-            const userVotingStatus = await getUserHasVoted(sessionId, userAddress);
+            
+            let userVotingStatus = false;
+            if (userAddress) {
+                userVotingStatus = await getUserHasVoted(sessionId, userAddress);
+            }
 
             const totalVotes = tally.reduce((acc, votes) => acc + votes, 0)
             setSession({...details, tally, totalVotes });
