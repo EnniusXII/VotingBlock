@@ -6,7 +6,7 @@ const HomePage = () => {
 
   return (
     <div className='homepage'>
-        <h1>Welcome to VotingBlock</h1>
+        <h1>Transparent, Secure, Blockchain Voting</h1>
 
         <NavLink to="/create">
             <button>Create Voting Session</button>

@@ -1,7 +1,7 @@
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 
-module.exports = buildModule("VotingBlockModule", (m) => {
-  const votingBlock = m.contract("VotingBlock");
+module.exports = buildModule("VBModule", (m) => {
+  const vBtest = m.contract("VBTest");
 
-  return { votingBlock };
+  return { vBtest };
 });
